@@ -1,0 +1,12 @@
+.search {
+  &__input, &__button {
+    border-radius: 5px;
+    border: none;
+    padding: 16px;
+    margin: 0px 8px;
+  }
+  &__button:hover {
+    background: silver;
+    cursor: pointer;
+  }
+}

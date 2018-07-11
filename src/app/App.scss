@@ -1,0 +1,26 @@
+.cycling {
+  display: flex;
+  justify-content: center;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 80%;
+  }
+  &__header, &__search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  &__header {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 32px;
+    img {
+      width: 300px;
+      height: 180px;
+    }
+    h2 {
+      margin: 8px 0;
+    }
+  }
+}

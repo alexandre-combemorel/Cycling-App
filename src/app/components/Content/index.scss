@@ -1,0 +1,29 @@
+.content {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  &__listing {
+    flex: 0 0 20%;
+    margin-right: 32px;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        list-style-type: none;
+        background: #ecececf0;
+        padding: 8px 16px;
+        margin: 8px 0;
+        cursor: pointer;
+        &:nth-child(2n+1) {
+          background: white;
+        }
+        &:first:child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  &__map {
+    flex: 1 1 100%;
+  }
+}
