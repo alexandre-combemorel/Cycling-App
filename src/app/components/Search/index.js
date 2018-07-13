@@ -1,18 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCities, filterCities } from '../../actions/cities';
+import { resetError, displayError } from '../../actions/error';
 import api from '../../api/apiMapper';
 import Loader from '../Loader';
+import MSG from '../../constants/messages';
 
 const mapDispatchToProps = dispatch => {
   return { 
     addCitiesList: citiesList => { dispatch(fetchCities(citiesList)); },
-    filterCities: keyWord => { dispatch(filterCities(keyWord)); }
+    filterCities: keyWord => { dispatch(filterCities(keyWord)); },
+    resetError: () => { dispatch(resetError()) },
+    displayError: errorMessage => { dispatch(displayError(errorMessage)) },
   }; 
 };
 
 const mapStateToProps = state => {
-  return { listCities: state.cities.listCities }
+  return { listCities: state.cities.listCities };
 };
 
 class Search extends React.PureComponent {
@@ -43,10 +47,15 @@ class Search extends React.PureComponent {
   fetchCities() {
     return api.getCities()
     .then((data) => {
-      this.props.addCitiesList(data);
+      if (data.length > 0) {
+        this.props.addCitiesList(data);
+        this.props.resetError();
+      } else {
+        this.props.displayError(MSG.NO_CITY);
+      }
     })
     .catch((error) => {
-      // Trigger an error with the error dialog component
+      this.props.displayError(MSG.SERVER_CONNEXION_FAILED);
     }); 
   }
 
