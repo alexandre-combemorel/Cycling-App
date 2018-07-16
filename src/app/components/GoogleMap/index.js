@@ -34,11 +34,6 @@ const mapStateToProps = state => {
 };
 
 class CyclingMap extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
 
   extractCoordinate() {
     if (this.props.listMarkers !== null) {

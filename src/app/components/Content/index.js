@@ -10,6 +10,8 @@ export default class Content extends React.PureComponent {
     this.state = {
       isLoading: false,
     };
+
+    this.displayLoading = this.displayLoading.bind(this);
   }
 
   displayLoading(state) {

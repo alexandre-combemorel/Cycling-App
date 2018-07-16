@@ -4,7 +4,8 @@ import Content from './components/Content';
 import ErrorDialog from './components/ErrorDialog';
 // 
 
-const App = () => (
+const App = () => {
+  return (
   <div className="cycling">
     <div className="cycling__inner">
       <div className="cycling__header">
@@ -22,7 +23,7 @@ const App = () => (
       </div>
     </div>
   </div>
-);
+)};
 export default App;
 
 import style from './App.scss';

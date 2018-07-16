@@ -8,8 +8,8 @@ import api from '../../api/apiMapper';
 const mapDispatchToProps = dispatch => {
   return { 
     addStations: listStations => { dispatch(addStations(listStations)); },
-    resetError: () => { dispatch(resetError()) },
-    displayError: errorMessage => { dispatch(displayError(errorMessage)) },
+    resetError: (provider) => { dispatch(resetError(provider)) },
+    displayError: (provider, message) => { dispatch(displayError(provider, message)) },
   }; 
 };
 
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 class Listing extends React.PureComponent {
   constructor(props) {
     super(props);
-
+    
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -31,30 +31,25 @@ class Listing extends React.PureComponent {
   }
 
   getStations(city) {
+    // RESET ERROR before display any new one
+    this.props.resetError('STATION');
     return api.getStations(city)
     .then((data) => {
       if (data.length > 0) {
         this.props.addStations(data);
-        this.props.resetError();
       } else {
-        this.props.displayError(MSG.NO_STATION);
+        this.props.displayError('STATION', MSG.NO_STATION);
       }
-      
     })
     .catch((error) => {
-      this.props.displayError(MSG.SERVER_CONNEXION_FAILED);
+      this.props.displayError('STATION', MSG.SERVER_CONNEXION_FAILED);
     });
   }
 
   displayCities() {
-    if (this.props.filterCities !== null && this.props.filterCities.length === 0) {
-       this.props.displayError(MSG.NO_CITY);
-    } else {
-      this.props.resetError();
-    }
     return this.props.filterCities !== null ? this.props.filterCities.map(city => (<li onClick={() => this.handleClick(city)} key={city}>{city}</li>)) : null;
   }
-  
+
   render () {
     return (
       <ul>
